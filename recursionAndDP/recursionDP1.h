@@ -74,7 +74,7 @@ vector<pair<int, int>> robotPath(const vector<vector<int>>& grid ){
 
 int magicIndexHelper(const vector<int>& arr, size_t start, size_t end){
     if(start >= end){
-        return -1;
+        return -1; // simple comment to show commit.
     }
     
     size_t mid = start + (end-start)/2;
