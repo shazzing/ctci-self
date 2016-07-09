@@ -9,6 +9,9 @@
 #ifndef recursionDP1_h
 #define recursionDP1_h
 #include <vector>
+#include <string>
+#include <utility>
+#include <algorithm>
 using namespace std;
 
 
@@ -92,6 +95,44 @@ int magicIndex(const vector<int>& arr){
         return -1;
     return magicIndexHelper(arr, 0, arr.size()-1);
 }
+
+
+// sort the string and then swap to create lexicographical bigger strings
+vector<string> getPermutation(string str){
+    vector<string> result;
+    if(str.empty()){
+        return result;
+    }
+    sort(str.begin(),str.end());
+    do{
+        result.emplace_back(str);
+        
+    }while(next_permutation(str.begin(), str.end()));
+    return result;
+}
+
+void matchParensHelper(int leftLPar, int leftRPar, const string& validPara, vector<string>& result  ){
+    if(!leftLPar && !leftRPar){
+        result.emplace_back(validPara);
+        return;
+    }
+    if(leftLPar){
+        matchParensHelper(leftLPar-1, leftRPar, validPara + "(", result);
+    }
+    if(leftRPar > leftLPar){
+        matchParensHelper(leftLPar, leftRPar-1, validPara + ")", result);
+    }
+}
+
+vector<string> matchParens(int numParen){
+    vector<string> result;
+    if(numParen > 0){
+        matchParensHelper(numParen, numParen, "", result);
+    }
+    return result;
+}
+
+
 
 
 
